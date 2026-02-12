@@ -1,0 +1,12 @@
+[package]
+name = "memochan"
+version = "0.1.0"
+edition = "2021"
+authors = ["Ppugend"]
+license = "MIT"
+
+[dependencies]
+iced = { version = "0.14", features = ["tokio", "advanced", "lazy"] }
+rfd = "0.14"
+tokio = { version = "1", features = ["fs", "io-util"] }
+chrono = "0.4"
