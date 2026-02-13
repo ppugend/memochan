@@ -1,0 +1,90 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "shell": {
+      "executable": "bash",
+      "args": ["-c"]
+    }
+  },
+  "tasks": [
+    {
+      "label": "check",
+      "type": "shell",
+      "command": "cargo check",
+      "group": "build",
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "cargo build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "build release",
+      "type": "shell",
+      "command": "cargo build --release",
+      "group": "build",
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "run debug",
+      "type": "shell",
+      "command": "cargo run",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "dependsOn": ["build"],
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "run release",
+      "type": "shell",
+      "command": "cargo run --release",
+      "group": "test",
+      "dependsOn": ["build release"],
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "bundle native",
+      "type": "shell",
+      "command": "cargo bundle --release",
+      "group": "build",
+      "dependsOn": ["build release"],
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": [],
+      "detail": "Creates platform-native bundles (.app+.dmg on macOS, .deb on Linux, .msi on Windows)",
+      "osx": {
+        "command": "cargo bundle --release && ./scripts/create-dmg.sh"
+      },
+      "linux": {
+        "command": "cargo bundle --release"
+      },
+      "windows": {
+        "command": "cargo bundle --release"
+      }
+    }
+  ]
+}
