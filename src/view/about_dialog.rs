@@ -1,7 +1,16 @@
-use crate::config::PRETENDARD;
+use crate::config::{APP_ICON, PRETENDARD};
 use crate::message::Message;
-use iced::widget::{button, column, container, text, Space};
+use iced::widget::{button, column, container, image, row, text, Space};
 use iced::{Alignment, Border, Element, Length};
+use std::sync::OnceLock;
+
+static APP_ICON_HANDLE: OnceLock<image::Handle> = OnceLock::new();
+
+fn get_app_icon_handle() -> image::Handle {
+    APP_ICON_HANDLE
+        .get_or_init(|| image::Handle::from_bytes(APP_ICON))
+        .clone()
+}
 
 pub fn view_about_dialog() -> Element<'static, Message> {
     let overlay = container(Space::new())
@@ -12,21 +21,26 @@ pub fn view_about_dialog() -> Element<'static, Message> {
             ..Default::default()
         });
 
-    let icon = text("📝").size(48);
+    let icon = image(get_app_icon_handle())
+        .width(Length::Fixed(80.0))
+        .height(Length::Fixed(80.0));
 
     let title_text = text("MemoChan")
         .font(PRETENDARD)
-        .size(24)
+        .size(20)
         .style(|_: &iced::Theme| text::Style {
             color: Some(iced::Color::from_rgb(0.1, 0.1, 0.1)),
         });
 
     let version_text = text(format!("Version {}", env!("CARGO_PKG_VERSION")))
         .font(PRETENDARD)
-        .size(12)
+        .size(11)
         .style(|_: &iced::Theme| text::Style {
             color: Some(iced::Color::from_rgb(0.4, 0.4, 0.4)),
         });
+
+    let title_column = column![title_text, Space::new().height(2), version_text]
+        .align_x(Alignment::Start);
 
     let separator_line = container(Space::new())
         .width(Length::Fill)
@@ -81,9 +95,15 @@ pub fn view_about_dialog() -> Element<'static, Message> {
         }
     });
 
+    let header_row = row![
+        icon,
+        Space::new().width(12),
+        title_column,
+    ]
+    .align_y(Alignment::Center);
+
     let dialog_content = column![
-        column![icon, Space::new().height(8), title_text, Space::new().height(4), version_text,]
-            .align_x(Alignment::Center),
+        header_row,
         Space::new().height(12),
         separator_line,
         Space::new().height(12),
