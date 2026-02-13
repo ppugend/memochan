@@ -1,5 +1,7 @@
 # MemoChan
 
+<img src="assets/images/appicon.png" width="128" height="128" alt="MemoChan Icon">
+
 A simple, lightweight notepad application built with the egui GUI framework.
 
 ![Version](https://img.shields.io/badge/version-0.2.0-blue)
