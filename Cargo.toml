@@ -12,8 +12,34 @@ tokio = { version = "1", features = ["fs", "io-util"] }
 chrono = "0.4"
 
 [profile.release]
-opt-level = 3     
-lto = true        
-codegen-units = 1 
-panic = "abort"   
-strip = true      
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+# Native bundling configuration
+# Usage:
+#   macOS:   cargo bundle --release
+#   Windows: cargo bundle --release (requires WiX Toolset)
+#   Linux:   cargo bundle --release (generates .deb)
+[package.metadata.bundle]
+name = "MemoChan"
+identifier = "com.memochan.app"
+icon = ["assets/images/appicon.png"]
+version = "0.1.0"
+copyright = "Copyright (c) 2025 ppugend. MIT License."
+category = "Utility"
+short_description = "A memo application"
+long_description = "MemoChan - A simple and elegant memo application built with Iced"
+
+# macOS specific
+osx_minimum_system_version = "10.13"
+
+# Linux specific
+[package.metadata.bundle.linux]
+files = { "/usr/share/icons/hicolor/256x256/apps/memochan.png" = "assets/images/appicon.png" }
+
+# Windows specific
+[package.metadata.bundle.windows]
+wix_license = "LICENSE"
