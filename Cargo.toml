@@ -1,14 +1,24 @@
 [package]
 name = "memochan"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["ppugend"]
 license = "MIT"
+rust-version = "1.93.0"
 
 [dependencies]
-iced = { version = "0.14", features = ["tokio", "advanced", "lazy", "image"] }
-rfd = "0.14"
-tokio = { version = "1", features = ["fs", "io-util"] }
+eframe = { version = "0.30", default-features = false, features = [
+    "accesskit",
+    "default_fonts",
+    "glow",
+    "persistence",
+    "wayland",
+    "x11",
+] }
+egui = "0.30"
+egui_extras = { version = "0.30", features = ["image"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+rfd = "0.15"
 chrono = "0.4"
 
 [profile.release]
@@ -31,7 +41,7 @@ version = "0.1.0"
 copyright = "Copyright (c) 2025 ppugend. MIT License."
 category = "Utility"
 short_description = "A memo application"
-long_description = "MemoChan - A simple and elegant memo application built with Iced"
+long_description = "MemoChan - A simple and elegant memo application built with egui"
 
 # macOS specific
 osx_minimum_system_version = "10.13"

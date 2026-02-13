@@ -15,21 +15,6 @@
       "args": [],
       "cwd": "${workspaceFolder}",
       "preLaunchTask": "build"
-    },
-    {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Debug (Release)",
-      "cargo": {
-        "args": ["build", "--release", "--bin=memochan", "--package=memochan"],
-        "filter": {
-          "name": "memochan",
-          "kind": "bin"
-        }
-      },
-      "args": [],
-      "cwd": "${workspaceFolder}",
-      "preLaunchTask": "build release"
     }
   ]
 }

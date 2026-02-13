@@ -1,8 +1,10 @@
 # MemoChan
 
-A simple, lightweight notepad application built with the Iced GUI framework.
+<img src="assets/images/appicon.png" width="128" height="128" alt="MemoChan Icon">
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+A simple, lightweight notepad application built with the egui GUI framework.
+
+![Version](https://img.shields.io/badge/version-0.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## About
@@ -13,41 +15,74 @@ MemoChan is a minimal text editor designed for everyday note-taking and text edi
 
 ## Features
 
-- **File Operations**: Create new files, open existing text files, and save your work
-- **Edit Functions**: Cut, copy, paste, delete, and select all text
-- **Format Options**: Toggle word wrap for better readability
-- **View Options**: Zoom in/out, reset zoom, and toggle status bar visibility
-- **Status Bar**: Shows current line and column position, zoom level, and encoding
-- **Keyboard Shortcuts**: Quick access to common functions
-- **Mouse Wheel Zoom**: Hold Ctrl and scroll to zoom in/out
+- **File Operations**: New, Open, Save, Save As
+- **Undo/Redo**: Full undo/redo support with history stack
+- **Word Wrap**: Toggle line wrapping for better readability
+- **Zoom**: Zoom in/out with font size adjustment
+- **Status Bar**: Shows current line, column, zoom level, and encoding (UTF-8)
+- **Tab Support**: Tab key inserts tab character in editor
+- **Time/Date Insertion**: Insert current date and time
+
+## Menu Structure
+
+### File
+| Item | Shortcut |
+|------|----------|
+| New | `Ctrl+N` / `Cmd+N` |
+| Open... | `Ctrl+O` / `Cmd+O` |
+| Save | `Ctrl+S` / `Cmd+S` |
+| Save As... | `Shift+Ctrl+S` / `Shift+Cmd+S` |
+| Exit | - |
+
+### Format
+| Item | Description |
+|------|-------------|
+| Word Wrap | Toggle line wrapping |
+
+### View
+| Item | Shortcut |
+|------|----------|
+| Zoom In | `Ctrl++` |
+| Zoom Out | `Ctrl+-` |
+| Reset Zoom | `Ctrl+0` |
+| Status Bar | Toggle visibility |
+
+### Help
+| Item | Description |
+|------|-------------|
+| About MemoChan | Show about dialog |
 
 ## Keyboard Shortcuts
 
-| Action | Shortcut |
-|--------|----------|
-| New File | Ctrl+N |
-| Open File | Ctrl+O |
-| Save File | Ctrl+S |
-| Cut | Ctrl+X |
-| Copy | Ctrl+C |
-| Paste | Ctrl+V |
-| Select All | Ctrl+A |
-| Zoom In | Ctrl++ |
-| Zoom Out | Ctrl+- |
-| Reset Zoom | Ctrl+0 |
-| Time/Date | F5 |
-| Delete | Del |
-
-## Known Issues
-
-1. **Undo Menu Not Working**: The undo function in the Edit menu is currently disabled and does not perform any action.
-
-2. **Keyboard Shortcuts with Korean Input**: When the system is in Korean input mode (IME), keyboard shortcuts may not work properly. Please switch to English input mode to use keyboard shortcuts.
+| Action | Windows/Linux | macOS |
+|--------|---------------|-------|
+| New File | `Ctrl+N` | `Cmd+N` |
+| Open File | `Ctrl+O` | `Cmd+O` |
+| Save File | `Ctrl+S` | `Cmd+S` |
+| Save As | `Shift+Ctrl+S` | `Shift+Cmd+S` |
+| Undo | `Ctrl+Z` | `Cmd+Z` |
+| Redo | `Ctrl+Y` or `Ctrl+Shift+Z` | `Cmd+Y` or `Cmd+Shift+Z` |
+| Zoom In | `Ctrl++` | `Ctrl++` |
+| Zoom Out | `Ctrl+-` | `Ctrl+-` |
+| Reset Zoom | `Ctrl+0` | `Ctrl+0` |
+| Time/Date | `F5` | `F5` |
+| Close Dialog | `Esc` or `Enter` | `Esc` or `Enter` |
 
 ## Requirements
 
-- Rust 1.70 or later
+- Rust 1.93 or later
 - macOS, Windows, or Linux
+
+## Supported Platforms
+
+| OS | Architecture | Status |
+|----|--------------|--------|
+| macOS | amd64 (Intel) | ✅ Tested |
+| macOS | arm64 (Apple Silicon) | ✅ Supported |
+| Linux | amd64 | ✅ Supported |
+| Linux | arm64 | ✅ Tested |
+| Windows | amd64 | ✅ Supported |
+| Windows | arm64 | ✅ Supported |
 
 ## Installation
 
@@ -72,7 +107,7 @@ cargo run
 
 ## Technology Stack
 
-- **GUI Framework**: [Iced](https://iced.rs/) 0.14
+- **GUI Framework**: [egui](https://www.egui.rs/) 0.30 / eframe
 - **Language**: Rust
 - **Font**: Pretendard Variable
 
@@ -86,4 +121,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Made with ❤️ and AI assistance*
+*Made with AI assistance*
