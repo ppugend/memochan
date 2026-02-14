@@ -8,6 +8,90 @@
   },
   "tasks": [
     {
+      "label": "cross-build: Linux ARM64",
+      "type": "shell",
+      "command": "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-unknown-linux-gnu-gcc cargo build --release --target aarch64-unknown-linux-gnu",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": ["$rustc"],
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
+      "label": "cross-build: Linux AMD64",
+      "type": "shell",
+      "command": "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc cargo build --release --target x86_64-unknown-linux-gnu",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": ["$rustc"],
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
+      "label": "cross-bundle: Linux AMD64",
+      "type": "shell",
+      "command": "CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER=x86_64-unknown-linux-gnu-gcc cargo bundle --release --target x86_64-unknown-linux-gnu",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": [],
+      "windows": { "hide": true },
+      "linux": { "hide": true },
+      "detail": "Cross-bundle for Linux AMD64 (.deb, AppImage)"
+    },
+    {
+      "label": "cross-bundle: Linux ARM64",
+      "type": "shell",
+      "command": "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-unknown-linux-gnu-gcc cargo bundle --release --target aarch64-unknown-linux-gnu",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": [],
+      "windows": { "hide": true },
+      "linux": { "hide": true },
+      "detail": "Cross-bundle for Linux ARM64 (.deb, AppImage)"
+    },
+    {
+      "label": "cross-build: Windows AMD64",
+      "type": "shell",
+      "command": "cargo build --release --target x86_64-pc-windows-gnu",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": ["$rustc"],
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
+      "label": "cross-bundle: Windows AMD64 (NSIS)",
+      "type": "shell",
+      "command": "./scripts/build_installer.sh",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": [],
+      "detail": "Cross-build and create NSIS installer for Windows AMD64",
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
+      "label": "cross-build: Windows ARM64",
+      "type": "shell",
+      "command": "cargo xwin build --release --target aarch64-pc-windows-msvc",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": ["$rustc"],
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
+      "label": "cross-bundle: Windows ARM64 (NSIS)",
+      "type": "shell",
+      "command": "./scripts/build_installer.sh aarch64-pc-windows-msvc",
+      "group": "build",
+      "presentation": { "clear": true },
+      "problemMatcher": [],
+      "detail": "Cross-build and create NSIS installer for Windows ARM64",
+      "windows": { "hide": true },
+      "linux": { "hide": true }
+    },
+    {
       "label": "check",
       "type": "shell",
       "command": "cargo check",
@@ -16,6 +100,16 @@
         "clear": true
       },
       "problemMatcher": ["$rustc"]
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "cargo clean",
+      "group": "build",
+      "presentation": {
+        "clear": true
+      },
+      "problemMatcher": []
     },
     {
       "label": "build",
