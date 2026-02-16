@@ -2,25 +2,27 @@
 
 <img src="assets/images/appicon.png" width="128" height="128" alt="MemoChan Icon">
 
-A simple, lightweight notepad application built with the egui GUI framework.
+A code editor with syntax highlighting and Markdown preview, built with the egui GUI framework.
 
-![Version](https://img.shields.io/badge/version-0.2.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ## About
 
-MemoChan is a minimal text editor designed for everyday note-taking and text editing tasks. It provides a clean, distraction-free writing experience with essential features you would expect from a notepad application.
+MemoChan is a code editor designed for everyday note-taking, text editing, and Markdown document creation. It provides syntax highlighting, Markdown preview, and essential features you would expect from a modern editor.
 
 **This application was implemented by the GLM5 AI model.**
 
 ## Features
 
+- **Syntax Highlighting**: Automatic language detection with support for 100+ languages, or manual language selection
+- **Markdown Preview**: Live preview with Tabs or Side-by-Side layout (Markdown files only)
+- **Search**: Find text with wrap-around search and keyboard navigation
 - **File Operations**: New, Open, Save, Save As
 - **Undo/Redo**: Full undo/redo support with history stack
 - **Word Wrap**: Toggle line wrapping for better readability
-- **Zoom**: Zoom in/out with font size adjustment
-- **Status Bar**: Shows current line, column, zoom level, and encoding (UTF-8)
-- **Tab Support**: Tab key inserts tab character in editor
+- **Zoom**: Zoom in/out with font size adjustment (Ctrl only, all platforms)
+- **Theme Support**: System, Light, and Dark themes
+- **Status Bar**: Shows current line, column, language, zoom level, and encoding (UTF-8)
 - **Time/Date Insertion**: Insert current date and time
 
 ## Menu Structure
@@ -35,20 +37,40 @@ MemoChan is a minimal text editor designed for everyday note-taking and text edi
 | Save As... | `Shift+Ctrl+S` / `Shift+Cmd+S` |
 | Exit       | -                              |
 
+### Edit
+
+| Item      | Shortcut       |
+| --------- | -------------- |
+| Undo      | `Ctrl+Z` / `Cmd+Z` |
+| Redo      | `Ctrl+Y` / `Cmd+Y` |
+| Find      | `Ctrl+F` / `Cmd+F` |
+| Time/Date | `F5`           |
+
+### View
+
+| Item          | Shortcut                        |
+| ------------- | ------------------------------- |
+| Zoom In       | `Ctrl++`                        |
+| Zoom Out      | `Ctrl+-`                        |
+| Reset Zoom    | `Ctrl+0`                        |
+| Status Bar    | Toggle visibility               |
+| Preview       | Toggle (Markdown only)          |
+| Layout        | Tabs / Side by Side (Markdown)  |
+| Switch Tab    | `Ctrl+P` / `Cmd+P`              |
+| Theme         | System / Light / Dark           |
+
+### Language
+
+| Item | Description                        |
+| ---- | ---------------------------------- |
+| Auto | Automatic language detection       |
+| ...  | Manual language selection (100+)   |
+
 ### Format
 
 | Item      | Description          |
 | --------- | -------------------- |
 | Word Wrap | Toggle line wrapping |
-
-### View
-
-| Item       | Shortcut          |
-| ---------- | ----------------- |
-| Zoom In    | `Ctrl++`          |
-| Zoom Out   | `Ctrl+-`          |
-| Reset Zoom | `Ctrl+0`          |
-| Status Bar | Toggle visibility |
 
 ### Help
 
@@ -58,19 +80,24 @@ MemoChan is a minimal text editor designed for everyday note-taking and text edi
 
 ## Keyboard Shortcuts
 
-| Action       | Windows/Linux              | macOS                    |
-| ------------ | -------------------------- | ------------------------ |
-| New File     | `Ctrl+N`                   | `Cmd+N`                  |
-| Open File    | `Ctrl+O`                   | `Cmd+O`                  |
-| Save File    | `Ctrl+S`                   | `Cmd+S`                  |
-| Save As      | `Shift+Ctrl+S`             | `Shift+Cmd+S`            |
-| Undo         | `Ctrl+Z`                   | `Cmd+Z`                  |
-| Redo         | `Ctrl+Y` or `Ctrl+Shift+Z` | `Cmd+Y` or `Cmd+Shift+Z` |
-| Zoom In      | `Ctrl++`                   | `Ctrl++`                 |
-| Zoom Out     | `Ctrl+-`                   | `Ctrl+-`                 |
-| Reset Zoom   | `Ctrl+0`                   | `Ctrl+0`                 |
-| Time/Date    | `F5`                       | `F5`                     |
-| Close Dialog | `Esc` or `Enter`           | `Esc` or `Enter`         |
+| Action          | Windows/Linux              | macOS                    |
+| --------------- | -------------------------- | ------------------------ |
+| New File        | `Ctrl+N`                   | `Cmd+N`                  |
+| Open File       | `Ctrl+O`                   | `Cmd+O`                  |
+| Save File       | `Ctrl+S`                   | `Cmd+S`                  |
+| Save As         | `Shift+Ctrl+S`             | `Shift+Cmd+S`            |
+| Undo            | `Ctrl+Z`                   | `Cmd+Z`                  |
+| Redo            | `Ctrl+Y` or `Ctrl+Shift+Z` | `Cmd+Y` or `Cmd+Shift+Z` |
+| Find            | `Ctrl+F`                   | `Cmd+F`                  |
+| Next Search     | `Enter` or `Down`          | `Enter` or `Down`        |
+| Previous Search | `Up`                       | `Up`                     |
+| Close Search    | `Esc`                      | `Esc`                    |
+| Switch Tab      | `Ctrl+P`                   | `Cmd+P`                  |
+| Zoom In         | `Ctrl++`                   | `Ctrl++`                 |
+| Zoom Out        | `Ctrl+-`                   | `Ctrl+-`                 |
+| Reset Zoom      | `Ctrl+0`                   | `Ctrl+0`                 |
+| Time/Date       | `F5`                       | `F5`                     |
+| Close Dialog    | `Esc` or `Enter`           | `Esc` or `Enter`         |
 
 ## Requirements
 
@@ -92,7 +119,23 @@ MemoChan is a minimal text editor designed for everyday note-taking and text edi
 
 > **Note**: Cross-build and cross-bundle are only supported on **macOS** due to required toolchains. On Linux or Windows, build natively or use CI/CD.
 
-### Cross-build
+### Native Build
+
+Build and run on your current platform:
+
+```bash
+cargo run --release
+```
+
+**Platform-specific notes:**
+
+| Platform | Command | Output |
+|----------|---------|--------|
+| macOS | `cargo run --release` | `target/release/memochan` |
+| Linux | `cargo run --release` | `target/release/memochan` |
+| Windows | `cargo run --release` | `target/release/memochan.exe` |
+
+### Cross-build (macOS only)
 
 #### macOS to Linux (Cross-build)
 
@@ -172,7 +215,7 @@ To build the Windows AMD64 binary (.exe) on macOS:
    ./scripts/build_installer.sh
    ```
 
-   The installer will be created at `target/x86_64-pc-windows-gnu/release/bundle/MemoChan_Setup_0.2.0_amd64.exe`.
+   The installer will be created at `target/x86_64-pc-windows-gnu/release/bundle/`.
 
 **2. Build for Windows ARM64**
 
@@ -196,7 +239,7 @@ To build the Windows ARM64 binary on macOS, using `cargo-xwin` is recommended:
    cargo xwin build --release --target aarch64-pc-windows-msvc
    ```
 
-   The executable will be in `target/aarch64-pc-windows-msvc/release/memochan.exe`.
+   The executable will be in `target/aarch64-pc-windows-msvc/release/`.
 
    **Optional: Create Installer (NSIS)**
 
@@ -205,11 +248,9 @@ To build the Windows ARM64 binary on macOS, using `cargo-xwin` is recommended:
    ./scripts/build_installer.sh aarch64-pc-windows-msvc
    ```
 
-   The installer will be created at `target/aarch64-pc-windows-msvc/release/bundle/MemoChan_Setup_0.2.0_arm64.exe`.
+   The installer will be created at `target/aarch64-pc-windows-msvc/release/bundle/`.
 
-## Installation
-
-### From Source
+## Running from Source
 
 1. Clone the repository:
 
@@ -232,6 +273,8 @@ cargo run
 ## Technology Stack
 
 - **GUI Framework**: [egui](https://www.egui.rs/) 0.30 / eframe
+- **Syntax Highlighting**: [syntect](https://github.com/trishume/syntect)
+- **Markdown Rendering**: [egui_commonmark](https://github.com/lampsitter/egui_commonmark)
 - **Language**: Rust
 - **Font**: Pretendard Variable
 

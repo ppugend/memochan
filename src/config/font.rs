@@ -1,4 +1,5 @@
 pub const PRETENDARD_FONT: &[u8] = include_bytes!("../../assets/fonts/PretendardVariable.ttf");
+pub const PRETENDARD_FONT_NAME: &str = "Pretendard";
 pub const DEFAULT_FONT_SIZE: f32 = 14.0;
 pub const MIN_FONT_SIZE: f32 = 8.0;
 pub const DEFAULT_ZOOM_LEVEL: i16 = 100;

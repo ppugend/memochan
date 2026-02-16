@@ -5,9 +5,11 @@
 
 mod app;
 mod config;
+mod editor;
+mod theme;
 
 use crate::app::Notepad;
-use crate::config::PRETENDARD_FONT;
+use crate::config::{PRETENDARD_FONT, PRETENDARD_FONT_NAME};
 use eframe::egui;
 
 fn main() -> eframe::Result<()> {
@@ -24,16 +26,16 @@ fn main() -> eframe::Result<()> {
         Box::new(|cc| {
             let mut fonts = egui::FontDefinitions::default();
             fonts.font_data.insert(
-                "Pretendard".to_owned(),
+                PRETENDARD_FONT_NAME.to_owned(),
                 std::sync::Arc::new(egui::FontData::from_static(PRETENDARD_FONT)),
             );
             fonts
                 .families
                 .entry(egui::FontFamily::Proportional)
                 .or_default()
-                .insert(0, "Pretendard".to_owned());
+                .insert(0, PRETENDARD_FONT_NAME.to_owned());
             cc.egui_ctx.set_fonts(fonts);
-            
+
             Ok(Box::new(Notepad::new(cc)))
         }),
     )
